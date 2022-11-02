@@ -2,17 +2,18 @@ package com.catnip.notepadku.data.room.datasource
 
 import com.catnip.notepadku.data.room.dao.NotesDao
 import com.catnip.notepadku.data.room.entity.Note
+import com.catnip.notepadku.data.room.model.NoteWithCategory
 
 /**
 Written with love by Muhammad Hermas Yuda Pamungkas
 Github : https://github.com/hermasyp
  **/
 interface NotesDataSource {
-    suspend fun getAllNotes(): List<Note>
+    suspend fun getAllNotes(): List<NoteWithCategory>
 
-    suspend fun getNotesByCategoryId(categoryId: Int): List<Note>
+    suspend fun getNotesByCategoryId(categoryId: Int): List<NoteWithCategory>
 
-    suspend fun getNoteById(id: Int): Note
+    suspend fun getNoteById(id: Int): NoteWithCategory
 
     suspend fun insertNote(note: Note): Long
 
@@ -22,15 +23,15 @@ interface NotesDataSource {
 }
 
 class NotesDataSourceImpl(private val dao: NotesDao) : NotesDataSource {
-    override suspend fun getAllNotes(): List<Note> {
+    override suspend fun getAllNotes(): List<NoteWithCategory> {
         return dao.getAllNotes()
     }
 
-    override suspend fun getNotesByCategoryId(categoryId: Int): List<Note> {
+    override suspend fun getNotesByCategoryId(categoryId: Int): List<NoteWithCategory> {
         return dao.getNotesByCategoryId(categoryId)
     }
 
-    override suspend fun getNoteById(id: Int): Note {
+    override suspend fun getNoteById(id: Int): NoteWithCategory {
         return dao.getNoteById(id)
     }
 
