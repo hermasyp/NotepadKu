@@ -17,9 +17,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.someValue.observe(this){
-            binding.tvExample.text = it
-        }
         viewModel.doSomeWork()
         lifecycleScope.launch {
             val notes = AppDatabase.getInstance(this@MainActivity).notesDao().getAllNotes()
